@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zkassa_sco/model/language_option.dart';
 import 'package:zkassa_sco/model/product.dart';
 
 class StartPage extends StatefulWidget {
@@ -11,7 +12,9 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   List<Product> scannedProducts = [];
 
-  void start(String? language) {}
+  void start(LanguageOption? language) {
+    Navigator.of(context).pushNamed("/example", arguments: language);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class _StartPageState extends State<StartPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children:
-                    ['fr', 'de', 'uk', 'nl']
+                    LanguageOption.values
                         .map(
                           (name) => GestureDetector(
                             onTap: () => start(name),
@@ -51,7 +54,7 @@ class _StartPageState extends State<StartPage> {
                               height: flagHeight,
                               margin: EdgeInsets.all(5),
                               child: Image.asset(
-                                'res/images/flag_$name.webp',
+                                name.getFlagDir,
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -60,23 +63,29 @@ class _StartPageState extends State<StartPage> {
                         .toList(),
               ),
             ),
-
-            const Expanded(child: SizedBox()),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => start(LanguageOption.english),
+              ),
+            ),
 
             // Bottom bar
-            Container(
-              height: screenHeight * 0.2,
-              color: const Color.fromARGB(100, 237, 237, 237),
+            GestureDetector(
+              onTap: () => start(LanguageOption.english),
+              child: Container(
+                height: screenHeight * 0.2,
+                color: const Color.fromARGB(100, 237, 237, 237),
 
-              child: const Center(
-                child: Text(
-                  "Tap the screen or scan something to start.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 35,
-                    color: Colors.white,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.bold,
+                child: const Center(
+                  child: Text(
+                    "Tap the screen or scan something to start.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
