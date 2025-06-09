@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:zkassa_sco/components/language_select.dart';
+import 'package:zkassa_sco/components/unanimated_page_route.dart';
 import 'package:zkassa_sco/model/language_option.dart';
 import 'package:zkassa_sco/model/product.dart';
+import 'package:zkassa_sco/pages/product_page.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -13,14 +16,17 @@ class _StartPageState extends State<StartPage> {
   List<Product> scannedProducts = [];
 
   void start(LanguageOption? language) {
-    Navigator.of(context).pushNamed("/example", arguments: language);
+    Navigator.of(context).push(
+      UnanimatedPageRoute(
+        builder:
+            (context) => ProductPage(lang: language ?? LanguageOption.english),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final flagHeight = 45.0;
-    final flagWidth = flagHeight * 1.6;
 
     return Container(
       decoration: BoxDecoration(
@@ -38,29 +44,12 @@ class _StartPageState extends State<StartPage> {
           children: [
             // Top bar
             Container(
-              height: flagHeight + 20,
               padding: EdgeInsets.all(5),
               color: const Color.fromARGB(150, 237, 237, 237),
 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children:
-                    LanguageOption.values
-                        .map(
-                          (name) => GestureDetector(
-                            onTap: () => start(name),
-                            child: Container(
-                              width: flagWidth,
-                              height: flagHeight,
-                              margin: EdgeInsets.all(5),
-                              child: Image.asset(
-                                name.getFlagDir,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
+                children: [LanguageSelect(onTap: (name) => start(name))],
               ),
             ),
             Expanded(

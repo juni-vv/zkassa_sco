@@ -13,4 +13,17 @@ extension LanguageOptionFunctions on LanguageOption {
         return "res/images/flag_de.webp";
     }
   }
+
+  String get name {
+    switch (this) {
+      case LanguageOption.dutch:
+        return "Nederlands";
+      case LanguageOption.english:
+        return "English";
+      case LanguageOption.french:
+        return "Oui oui baguette";
+      case LanguageOption.german:
+        return "Ja ja wurstenbrod";
+    }
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zkassa_sco/pages/example_page.dart';
 import 'package:zkassa_sco/pages/start_page.dart';
 
 void main() {
@@ -30,10 +29,6 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const StartPage(),
-      routes: {
-        "/start": (_) => const StartPage(),
-        "/example": (_) => const ExamplePage(),
-      },
     );
   }
 }
