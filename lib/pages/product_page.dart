@@ -21,6 +21,8 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
+  void requestHelp() {}
+
   @override
   void initState() {
     super.initState();
@@ -33,10 +35,7 @@ class _ProductPageState extends State<ProductPage> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           transform: GradientRotation(30 + 90),
-          colors: [
-            Color.fromARGB(0xff, 0x08, 0x60, 0xc4),
-            Color.fromARGB(0xff, 0xdD5, 0x41, 0xc4),
-          ],
+          colors: [Color.fromARGB(0xff, 0x08, 0x60, 0xc4), Color.fromARGB(0xff, 0xdD5, 0x41, 0xc4)],
         ),
       ),
       child: Scaffold(
@@ -51,9 +50,7 @@ class _ProductPageState extends State<ProductPage> {
 
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  LanguageSelect(onTap: (name) => changeLanguage(name)),
-                ],
+                children: [LanguageSelect(onTap: (name) => changeLanguage(name))],
               ),
             ),
             // body
@@ -66,44 +63,73 @@ class _ProductPageState extends State<ProductPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("LANGUAGE: ${lang.name}"),
-                      FilledButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text("GO BACK"),
-                      ),
+                      FilledButton(onPressed: () => Navigator.of(context).pop(), child: Text("GO BACK")),
                     ],
                   ),
 
-                  // Overview, buttons (pay, fruit, etc.)
+                  // Overview panel (buttons, total price, discounts)
                   Container(
-                    constraints: BoxConstraints(maxWidth: 400),
+                    constraints: BoxConstraints(maxWidth: 425),
                     child: Padding(
-                      padding: EdgeInsetsGeometry.all(5),
+                      padding: EdgeInsetsGeometry.directional(start: 5, end: 10, top: 5, bottom: 10),
                       child: Column(
                         children: [
+                          SizedBox(height: 5),
+                          Align(
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(minWidth: double.infinity),
+                              child: SizedBox(
+                                height: 100, // fixed height
+                                child: FilledButton(
+                                  style: FilledButton.styleFrom(
+                                    backgroundColor: Color.fromARGB(133, 255, 136, 0),
+                                    foregroundColor: Colors.white,
+                                  ),
+                                  onPressed: () => requestHelp(),
+                                  child: const Text(
+                                    style: TextStyle(
+                                      fontSize: 21,
+                                      color: Colors.white,
+                                      fontFamily: 'Raleway',
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    "Request help",
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
                           Wrap(
-                            runSpacing: 20,
-                            spacing: 20,
+                            runSpacing: 10,
+                            spacing: 10,
                             children:
                                 ["Fruit", "Vegetables", "Bread", "Drinks"]
                                     .map<Widget>(
                                       (item) => Container(
+                                        width: 200,
+                                        height: 200,
+
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            15,
-                                          ),
                                           color: Color(0x55FFFFFF),
+                                          borderRadius: BorderRadius.circular(10),
                                         ),
+
                                         padding: EdgeInsets.all(10),
                                         child: Column(
                                           children: [
-                                            Image.network(
-                                              "https://picsum.photos/160",
+                                            SizedBox(
+                                              width: 150,
+                                              height: 150,
+                                              child: Image.network("https://picsum.photos/150", fit: BoxFit.cover),
                                             ),
                                             Text(
-                                              style:
-                                                  Theme.of(
-                                                    context,
-                                                  ).textTheme.headlineMedium,
+                                              style: TextStyle(
+                                                fontSize: 21,
+                                                color: Colors.white,
+                                                fontFamily: 'Raleway',
+                                                fontWeight: FontWeight.normal,
+                                              ),
                                               item,
                                             ),
                                           ],
@@ -112,14 +138,15 @@ class _ProductPageState extends State<ProductPage> {
                                     )
                                     .toList(),
                           ),
+                          Expanded(child: Column(children: [
+                              
+                            ],)),
                           Align(
                             child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minWidth: double.infinity,
-                              ),
-                              child: FilledButton(
-                                onPressed: null,
-                                child: const Text("Pay"),
+                              constraints: BoxConstraints(minWidth: double.infinity),
+                              child: SizedBox(
+                                height: 200, // fixed height
+                                child: FilledButton(onPressed: null, child: const Text("Pay")),
                               ),
                             ),
                           ),
