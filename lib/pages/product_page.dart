@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zkassa_sco/components/language_select.dart';
 import 'package:zkassa_sco/model/language_option.dart';
 
 class ProductPage extends StatefulWidget {
@@ -13,6 +14,12 @@ class _ProductPageState extends State<ProductPage> {
   late LanguageOption lang;
 
   _ProductPageState();
+
+  void changeLanguage(LanguageOption language) {
+    setState(() {
+      lang = language;
+    });
+  }
 
   @override
   void initState() {
@@ -39,10 +46,15 @@ class _ProductPageState extends State<ProductPage> {
           children: [
             // top bar
             Container(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(150, 237, 237, 237),
+              padding: EdgeInsets.all(5),
+              color: const Color.fromARGB(150, 237, 237, 237),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  LanguageSelect(onTap: (name) => changeLanguage(name)),
+                ],
               ),
-              child: Row(children: [const Text('Hi')]),
             ),
             // body
             Expanded(
