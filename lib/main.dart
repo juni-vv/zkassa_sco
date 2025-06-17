@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zkassa_sco/components/drag_scroll_behavior.dart';
 import 'package:zkassa_sco/pages/start_page.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -14,7 +15,7 @@ void main() async {
   );
 
   windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.setFullScreen(true);
+    //await windowManager.setFullScreen(true);
     await windowManager.show();
     await windowManager.focus();
   });
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const StartPage(),
+      scrollBehavior: DragScrollBehavior(),
     );
   }
 }
