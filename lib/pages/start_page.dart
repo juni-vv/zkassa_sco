@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:zkassa_sco/components/language_select.dart';
 import 'package:zkassa_sco/components/unanimated_page_route.dart';
 import 'package:zkassa_sco/model/language_option.dart';
-import 'package:zkassa_sco/model/product.dart';
 import 'package:zkassa_sco/pages/product_page.dart';
 
 class StartPage extends StatefulWidget {
@@ -13,8 +12,6 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  List<Product> scannedProducts = [];
-
   void start(LanguageOption? language) {
     Navigator.of(context).push(
       UnanimatedPageRoute(
