@@ -1,3 +1,7 @@
+# Custom
+pubspec.lock
+.vscode/
+
 # Miscellaneous
 *.class
 *.log
