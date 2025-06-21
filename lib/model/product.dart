@@ -1,11 +1,7 @@
 class Product {
   final double cost;
   final String name;
-  final int quantity;
+  int quantity;
 
-  const Product({
-    required this.cost,
-    required this.name,
-    required this.quantity,
-  });
+  Product({required this.cost, required this.name, required this.quantity});
 }

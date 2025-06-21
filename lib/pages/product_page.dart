@@ -28,7 +28,12 @@ class _ProductPageState extends State<ProductPage> {
 
   void addProduct(String name) {
     setState(() {
-      _products.add(Product(cost: 0, name: name, quantity: 1));
+      final index = _products.indexWhere((p) => p.name == name);
+      if (index != -1) {
+        _products[index].quantity++;
+      } else {
+        _products.add(Product(cost: 0, name: name, quantity: 1));
+      }
     });
   }
 
