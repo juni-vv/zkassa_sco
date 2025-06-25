@@ -4,13 +4,13 @@ extension LanguageOptionFunctions on LanguageOption {
   String get getFlagDir {
     switch (this) {
       case LanguageOption.dutch:
-        return "res/images/flag_nl.webp";
+        return "res/images/flag/flag_nl.webp";
       case LanguageOption.english:
-        return "res/images/flag_uk.webp";
+        return "res/images/flag/flag_uk.webp";
       case LanguageOption.french:
-        return "res/images/flag_fr.webp";
+        return "res/images/flag/flag_fr.webp";
       case LanguageOption.german:
-        return "res/images/flag_de.webp";
+        return "res/images/flag/flag_de.webp";
     }
   }
 

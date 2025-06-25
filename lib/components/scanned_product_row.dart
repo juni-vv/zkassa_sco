@@ -20,12 +20,11 @@ class ScannedProductRow extends StatelessWidget {
             children: [
               ProductQuantityButton(true, product.quantity, onTap: onAdd),
               SizedBox(width: 10),
-              Text(
-                product.quantity.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontFamily: 'Raleway',
+              SizedBox(
+                width: 25, // minimum width that fits all numbers 0-99
+                child: Text(
+                  product.quantity.toString(),
+                  style: TextTheme.of(context).headlineSmall,
                 ),
               ),
               SizedBox(width: 10),
@@ -34,11 +33,7 @@ class ScannedProductRow extends StatelessWidget {
               Expanded(
                 child: Text(
                   product.name,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontFamily: 'Raleway',
-                  ),
+                  style: TextTheme.of(context).headlineSmall,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

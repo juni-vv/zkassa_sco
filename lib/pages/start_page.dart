@@ -62,16 +62,11 @@ class _StartPageState extends State<StartPage> {
                 height: screenHeight * 0.2,
                 color: const Color.fromARGB(100, 237, 237, 237),
 
-                child: const Center(
+                child: Center(
                   child: Text(
                     "Tap the screen or scan something to start.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.white,
-                      fontFamily: 'Raleway',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),
               ),

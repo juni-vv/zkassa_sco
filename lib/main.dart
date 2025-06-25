@@ -31,14 +31,42 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: TextTheme(
+          headlineSmall: TextStyle(
+            fontSize: 21,
+            color: Colors.white,
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.normal,
+          ),
+          displaySmall: TextStyle(
+            fontSize: 35,
+            color: Colors.white,
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         filledButtonTheme: FilledButtonThemeData(
           style: ButtonStyle(
             shape: WidgetStateProperty.all(
-              const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+              const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
             ),
           ),
         ),
-        colorScheme: ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: Colors.deepPurple),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            shape: WidgetStateProperty.all(
+              const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+          ),
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: Colors.deepPurple,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const StartPage(),

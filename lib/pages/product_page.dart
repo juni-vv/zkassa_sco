@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zkassa_sco/components/language_select.dart';
-import 'package:zkassa_sco/components/product_icon_button.dart';
 import 'package:zkassa_sco/components/scanned_product_row.dart';
+import 'package:zkassa_sco/model/category_option.dart';
 import 'package:zkassa_sco/model/language_option.dart';
 import 'package:zkassa_sco/model/scanned_product.dart';
 
@@ -15,6 +15,7 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   late LanguageOption lang;
+  bool helpRequested = false;
 
   final List<ScannedProduct> _products = [];
 
@@ -30,18 +31,16 @@ class _ProductPageState extends State<ProductPage> {
 
   void addProduct(String name) {
     setState(() {
-      final index = _products.indexWhere((p) => p.name == name);
-      if (index != -1) {
-        _products[index] = _products[index].withQuantity(
-          _products[index].quantity + 1,
-        );
-      } else {
-        _products.add(ScannedProduct(cost: 0, name: name, quantity: 1));
-      }
+      _products.add(ScannedProduct(cost: 0, name: name, quantity: 1));
     });
   }
 
-  void requestHelp() {}
+  void requestHelp() {
+    // mark button as pushed
+    setState(() => helpRequested = true);
+
+    // TODO: integrate with backend
+  }
 
   @override
   void initState() {
@@ -180,47 +179,56 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                               child: SizedBox(
                                 height: 100, // fixed height
-                                child: FilledButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        WidgetStateProperty.resolveWith<Color>((
-                                          Set<WidgetState> states,
-                                        ) {
-                                          if (states.contains(
-                                            WidgetState.hovered,
-                                          )) {
-                                            return const Color.fromARGB(
-                                              255,
-                                              203,
-                                              107,
-                                              94,
-                                            );
-                                          }
-                                          return const Color.fromARGB(
-                                            255,
-                                            203,
-                                            107,
-                                            94,
-                                          );
-                                        }),
-                                    foregroundColor: WidgetStateProperty.all(
-                                      Colors.white,
-                                    ),
-                                    overlayColor: WidgetStateProperty.all(
-                                      Colors.transparent,
-                                    ),
-                                  ),
-                                  onPressed: () => requestHelp(),
-                                  child: const Text(
-                                    style: TextStyle(
-                                      fontSize: 21,
-                                      color: Colors.white,
-                                      fontFamily: 'Raleway',
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    "Request help",
-                                  ),
-                                ),
+                                child:
+                                    helpRequested
+                                        ? OutlinedButton(
+                                          onPressed: null,
+                                          // () => setState(
+                                          //   () => helpRequested = false,
+                                          // ),
+                                          style: const ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                  Color.fromARGB(96, 0, 255, 0),
+                                                ),
+                                            overlayColor:
+                                                WidgetStatePropertyAll(
+                                                  Colors.transparent,
+                                                ),
+                                          ),
+                                          child: Text(
+                                            style:
+                                                Theme.of(
+                                                  context,
+                                                ).textTheme.headlineSmall,
+                                            "Help requested",
+                                          ),
+                                        )
+                                        : FilledButton(
+                                          style: const ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                  Color.fromARGB(
+                                                    255,
+                                                    203,
+                                                    107,
+                                                    94,
+                                                  ),
+                                                ),
+                                            overlayColor:
+                                                WidgetStatePropertyAll(
+                                                  Colors.transparent,
+                                                ),
+                                          ),
+                                          onPressed: () => requestHelp(),
+                                          child: Text(
+                                            style:
+                                                Theme.of(
+                                                  context,
+                                                ).textTheme.headlineSmall,
+                                            "Request help",
+                                          ),
+                                        ),
                               ),
                             ),
                           ),
@@ -229,13 +237,11 @@ class _ProductPageState extends State<ProductPage> {
                             runSpacing: 10,
                             spacing: 10,
                             children:
-                                ["Fruit", "Vegetables", "Bread", "Drinks"]
+                                CategoryOption.values
                                     .map<Widget>(
                                       (item) => GestureDetector(
-                                        onTap:
-                                            () => addProduct(
-                                              item,
-                                            ), // <- this triggers adding the product
+                                        onTap: null,
+                                        //() => addProduct(item,), // <- this triggers adding the product
                                         child: Container(
                                           width: 200,
                                           height: 200,
@@ -256,19 +262,17 @@ class _ProductPageState extends State<ProductPage> {
                                               SizedBox(
                                                 width: 150,
                                                 height: 150,
-                                                child: Image.network(
-                                                  "https://picsum.photos/150",
-                                                  fit: BoxFit.cover,
+                                                child: Image.asset(
+                                                  item.getImgPath,
+                                                  fit: BoxFit.contain,
                                                 ),
                                               ),
                                               Text(
-                                                item,
-                                                style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.white,
-                                                  fontFamily: 'Raleway',
-                                                  fontWeight: FontWeight.normal,
-                                                ),
+                                                item.name,
+                                                style:
+                                                    Theme.of(
+                                                      context,
+                                                    ).textTheme.headlineSmall,
                                               ),
                                             ],
                                           ),
@@ -288,8 +292,19 @@ class _ProductPageState extends State<ProductPage> {
                               child: SizedBox(
                                 height: 200, // fixed height
                                 child: FilledButton(
-                                  onPressed: null,
-                                  child: const Text("Pay"),
+                                  style: const ButtonStyle(
+                                    overlayColor: WidgetStatePropertyAll(
+                                      Colors.transparent,
+                                    ),
+                                  ),
+                                  onPressed: () => 1 + 1,
+                                  child: Text(
+                                    "Pay",
+                                    style:
+                                        Theme.of(
+                                          context,
+                                        ).textTheme.displaySmall,
+                                  ),
                                 ),
                               ),
                             ),
