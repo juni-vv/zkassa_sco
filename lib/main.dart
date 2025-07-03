@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:zkassa_sco/components/drag_scroll_behavior.dart';
 import 'package:zkassa_sco/pages/start_page.dart';
-import 'package:window_manager/window_manager.dart';
+// import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
+  // await windowManager.ensureInitialized();
 
-  WindowOptions windowOptions = const WindowOptions(
-    center: true,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    //titleBarStyle: TitleBarStyle.hidden,
-  );
+  // WindowOptions windowOptions = const WindowOptions(
+  //   center: true,
+  //   backgroundColor: Colors.transparent,
+  //   skipTaskbar: false,
+  //   //titleBarStyle: TitleBarStyle.hidden,
+  // );
 
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    //await windowManager.setFullScreen(true);
-    await windowManager.show();
-    await windowManager.focus();
-  });
+  // windowManager.waitUntilReadyToShow(windowOptions, () async {
+  //   //await windowManager.setFullScreen(true);
+  //   await windowManager.show();
+  //   await windowManager.focus();
+  // });
 
   runApp(const MyApp());
 }
