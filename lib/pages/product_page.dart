@@ -37,7 +37,7 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
-  void scannedProduct(String barcode) {
+  void scanProduct(String barcode) {
     // calls the API to get product info
     // example:
     addProduct(ScannedProduct(cost: 12, name: barcode, quantity: 1));
@@ -55,7 +55,7 @@ class _ProductPageState extends State<ProductPage> {
     super.initState();
     lang = widget.lang;
     if (widget.scannedProductCode != null) {
-      scannedProduct(widget.scannedProductCode!);
+      scanProduct(widget.scannedProductCode!);
     }
   }
 
@@ -68,7 +68,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return BarcodeKeyboardListener(
-      onBarcodeScanned: scannedProduct,
+      onBarcodeScanned: scanProduct,
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
