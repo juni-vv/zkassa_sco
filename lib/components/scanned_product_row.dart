@@ -21,7 +21,7 @@ class ScannedProductRow extends StatelessWidget {
               ProductQuantityButton(true, product.quantity, onTap: onAdd),
               SizedBox(width: 10),
               SizedBox(
-                width: 25, // minimum width that fits all numbers 0-99
+                width: 26, // minimum width that fits all numbers 0-99
                 child: Text(
                   product.quantity.toString(),
                   style: TextTheme.of(context).headlineSmall,
