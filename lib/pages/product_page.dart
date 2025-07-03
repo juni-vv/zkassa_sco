@@ -8,7 +8,8 @@ import 'package:zkassa_sco/model/scanned_product.dart';
 
 class ProductPage extends StatefulWidget {
   final LanguageOption lang;
-  const ProductPage({super.key, required this.lang});
+  final String? scannedProductCode;
+  const ProductPage({super.key, required this.lang, this.scannedProductCode});
 
   @override
   State<StatefulWidget> createState() => _ProductPageState();
@@ -53,6 +54,9 @@ class _ProductPageState extends State<ProductPage> {
   void initState() {
     super.initState();
     lang = widget.lang;
+    if (widget.scannedProductCode != null) {
+      scannedProduct(widget.scannedProductCode!);
+    }
   }
 
   @override
